@@ -1,20 +1,12 @@
-This is the current clock I have.
+Clock
+=====
 
--Roger Meier
+Heavily modified clock, originally by [Roger Meier](https://github.com/bufferoverflow/clock)
 
-# Goal
 
-The goal is to provide a well readable clock based on open standards.
+Origin
+------
 
-* [Source Code](https://github.com/bufferoverflow/clock/)
-* [CONTRIBUTING](CONTRIBUTING.md)
-* [LICENSE](LICENSE.md)
-
-# Why
-
-Get familiar with the Mozilla Marketplace ecosystem and Open Web Applications.
-
-# Origin
 The initial source code for index.html and js/app.js is from http://www.3quarks.com/images/svg/siemens-clock.svg
 
      Copyright (c) 2012 Rüdiger Appel
