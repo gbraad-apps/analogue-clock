@@ -6,18 +6,22 @@
      height="100%" 
      viewBox="0 0 200 200">
   <g id="faceplate">
-    <circle id="faceplateCircle" cx="100" cy="100" r="98" style="fill: black; stroke: white; stroke-width: 3.0"/>
-  </g>
-
-  <g id="hourHand" visibility="hidden">
-    <line x1="100" y1="100" x2="100" y2="10" style="stroke: white; stroke-width: 4" />
+    <circle id="faceplateCircle" cx="100" cy="100" r="98" style="fill: rgb(179, 179, 179); stroke: black; stroke-width: 3.0"/>
   </g>
   
-  <g id="minuteHand" visibility="hidden">
-    <line x1="100" y1="100" x2="100" y2="20" style="stroke: white; stroke-width: 3" />
+  <g id="faceplate">
+    <circle id="faceplateInnerCircle" cx="100" cy="100" r="70" style="fill: black; stroke: black; stroke-width: 3.0"/>
   </g>
 
-  <g id="secondHand" visibility="hidden">
+  <g id="hourHand">
+    <line x1="100" y1="100" x2="100" y2="33" style="stroke: white; stroke-width: 4" />
+  </g>
+  
+  <g id="minuteHand">
+    <line x1="100" y1="100" x2="100" y2="36" style="stroke: white; stroke-width: 3" />
+  </g>
+
+  <g id="secondHand">
     <line x1="100" y1="100" x2="100" y2="7" style="stroke: rgb(255, 140, 0); stroke-width: 2" />
   </g>
 
