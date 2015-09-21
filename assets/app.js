@@ -7,7 +7,7 @@ SPDX-License-Identifier:	MIT
 */
 
 document.addEventListener ('DOMContentLoaded', function() {
-	loadSvg("clockface", "/assets/clockface.svg");
+	loadSvg("clockface", "assets/clockface.svg");
 	setInterval(tick, 50);
 }, false);
 
