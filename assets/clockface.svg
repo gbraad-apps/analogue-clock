@@ -6,22 +6,22 @@
      height="100%" 
      viewBox="0 0 200 200">
   <g id="faceplate">
-    <circle id="faceplateCircle" cx="100" cy="100" r="98" style="fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-width: 3.0"/>
+    <circle id="faceplateCircle" cx="100" cy="100" r="98" style="fill: black; stroke: white; stroke-width: 3.0"/>
   </g>
 
   <g id="hourHand" visibility="hidden">
-    <line x1="100" y1="100" x2="100" y2="5" style="stroke: rgb(0, 0, 0); stroke-width: 3" />
+    <line x1="100" y1="100" x2="100" y2="5" style="stroke: white; stroke-width: 3" />
   </g>
   
   <g id="minuteHand" visibility="hidden">
-    <line x1="100" y1="100" x2="100" y2="20" style="stroke: rgb(0, 0, 0); stroke-width: 2" />
+    <line x1="100" y1="100" x2="100" y2="20" style="stroke: white; stroke-width: 2" />
   </g>
 
   <g id="secondHand" visibility="hidden">
-    <line x1="100" y1="100" x2="100" y2="40" style="stroke: rgb(0, 0, 0); stroke-width: 1" />
+    <line x1="100" y1="100" x2="100" y2="40" style="stroke: white; stroke-width: 1" />
   </g>
 
   <g id="axisCover">
-    <circle id="axisCoverCircle" cx="100" cy="100" r="2" style="fill: rgb(0, 0, 0); stroke: rgb(0, 0, 0); stroke-width: 3.0"/>
+    <circle id="axisCoverCircle" cx="100" cy="100" r="2" style="fill: white; stroke: white; stroke-width: 3.0"/>
   </g>
 </svg>
