@@ -26,6 +26,6 @@
   </g>
 
   <g id="axisCover">
-    <circle id="axisCoverCircle" cx="100" cy="100" r="3" style="fill: black; stroke: white; stroke-width: 2.0"/>
+    <circle id="axisCoverCircle" cx="100" cy="100" r="4" style="fill: black; stroke: white; stroke-width: 2.0"/>
   </g>
 </svg>
