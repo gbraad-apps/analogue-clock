@@ -20,15 +20,15 @@ var loadSvg = function(target, filename) {
 }
 
 var tick = function() {
-	var now     = new Date();
-	var hours   = now.getHours();
-	var minutes = now.getMinutes();
-	var time    = Math.min(60000, 1.025 * (1000 * now.getSeconds() + now.getMilliseconds()));
-	var seconds = Math.floor(time / 1000);
-	var millis  = time % 1000;
-	rotate('hourHand',   hours * 30 + minutes * 0.5);
-	rotate('minuteHand', minutes * 6);
-	rotate('secondHand', 6 * seconds + 3 * (1 + Math.cos(Math.PI + Math.PI * (0.001 * millis))));
+  const now = new Date();
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const seconds = now.getSeconds();
+  const millis = now.getMilliseconds();
+
+  rotate('hourHand', hours * 30 + minutes * 0.5);
+  rotate('minuteHand', minutes * 6);
+  rotate('secondHand', seconds * 6 + (6 * millis / 1000));
 };
 
 function rotate(id, angle) {
