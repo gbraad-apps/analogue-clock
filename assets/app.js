@@ -8,7 +8,7 @@ SPDX-License-Identifier:	MIT
 
 document.addEventListener ('DOMContentLoaded', function() {
 	loadSvg("clockface", "assets/clockface.svg");
-	setInterval(tick, 50);
+	setInterval(updateClock, 1000);
 }, false);
 
 var loadSvg = function(target, filename) {
@@ -19,7 +19,7 @@ var loadSvg = function(target, filename) {
 	document.getElementById(target).innerHTML = svgDoc;
 }
 
-var tick = function() {
+var updateClock = function() {
   const now = new Date();
   const hours = now.getHours();
   const minutes = now.getMinutes();
