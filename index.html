@@ -1,129 +1,136 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>gbraad's Analogue Clock</title>
-		<meta name="application-name" content="gbraad's Analogue Clock">
-		<link rel="icon" sizes="16x16" href="assets/icon_16.png">
-		<link rel="icon" sizes="48x48" href="assets/icon_48.png">
-		<link rel="icon" sizes="60x60" href="assets/icon_60.png">
-		<link rel="icon" sizes="128x128" href="assets/icon_128.png">
-		<style>
-			body {
-			  overflow: hidden;
-			  min-height: 100%;
-			  margin: 0;
-			  background: black;
-			}
-	  
-			html {
-			  height: 100%;
-			  background: transparent;
-			}
-	  
-			#clockface {
-			  height: 96vh;
-			  width: 96vw;
-			}
-	  
-			/* Train station clock bounce effect */
-			.hand {
-			  /* Fast start, slow end with slight bounce */
-			  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1.2);
-			}
-			
-			#secondHand {
-			  /* Faster transition for second hand but same bounce effect */
-			  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1.2);
-			}
-		  </style>
-	     <script type="text/javascript">
-			// Track current angles for continuous rotation
-			var currentAngles = {
-			  hourHand: 0,
-			  minuteHand: 0,
-			  secondHand: 0
-			};
-			
-			// Initialize the clock
-			document.addEventListener ('DOMContentLoaded', function() {
-			  // First update without animation
-			  document.querySelectorAll('.hand').forEach(el => el.style.transition = "none");
-			  updateClock();
-			  setTimeout(() => {
-				document.querySelectorAll('.hand').forEach(el => el.style.transition = "");
-				setInterval(updateClock, 1000);
-			  }, 50);
-			});
-	  
-			function updateClock() {
-			  const now = new Date();
-			  const hours = now.getHours();
-			  const minutes = now.getMinutes();
-			  const seconds = now.getSeconds();
-			  
-			  // Calculate target angles
-			  const targetHourAngle = (hours % 12) * 30 + minutes * 0.5;
-			  const targetMinAngle = minutes * 6;
-			  const targetSecAngle = seconds * 6;
-			  
-			  // Update each hand with continuous rotation
-			  updateHand('hourHand', targetHourAngle);
-			  updateHand('minuteHand', targetMinAngle);
-			  updateHand('secondHand', targetSecAngle);
-			}
-	  
-			function updateHand(id, targetAngle) {
-			  const hand = document.getElementById(id);
-			  if (!hand) return;
-			  
-			  // Calculate the shortest path to the new angle
-			  let currentAngle = currentAngles[id] || 0;
-			  let angleDiff = targetAngle - (currentAngle % 360);
-			  
-			  // Adjust for crossing the 0/360 boundary
-			  if (angleDiff > 180) angleDiff -= 360;
-			  if (angleDiff < -180) angleDiff += 360;
-			  
-			  // Calculate the new absolute angle (keeps increasing)
-			  const newAngle = currentAngle + angleDiff;
-			  currentAngles[id] = newAngle;
-			  
-			  // Apply the rotation
-			  hand.setAttribute("transform", `rotate(${newAngle})`);
-			}
-		  </script>
-	</head>
-	<body>
-		<div id="clockface">
-			<svg xmlns="http://www.w3.org/2000/svg" style="background-color: transparent" width="100%" height="100%"
-			  viewBox="0 0 200 200">
-			  <!-- Clock face -->
-			  <circle cx="100" cy="100" r="98" style="fill: rgb(179, 179, 179); stroke: black; stroke-width: 3.0" />
-			  <circle cx="100" cy="100" r="70" style="fill: black; stroke: black; stroke-width: 3.0" />
-			  
-			  <!-- Clock hands -->
-			  <g transform="translate(100, 100)">
-				<g id="hourHand" class="hand">
-				  <line x1="0" y1="0" x2="0" y2="-52" style="stroke: white; stroke-width: 5" />
-				</g>
-			  </g>
-	  
-			  <g transform="translate(100, 100)">
-				<g id="minuteHand" class="hand">
-				  <line x1="0" y1="0" x2="0" y2="-67" style="stroke: white; stroke-width: 3" />
-				</g>
-			  </g>
-	  
-			  <g transform="translate(100, 100)">
-				<g id="secondHand" class="hand">
-				  <line x1="0" y1="0" x2="0" y2="-93" style="stroke: rgb(255, 140, 0); stroke-width: 2" />
-				</g>
-			  </g>
-	  
-			  <!-- Center cap -->
-			  <circle cx="100" cy="100" r="4" style="fill: black; stroke: white; stroke-width: 2.0" />
-			</svg>
-		  </div>
-	</body>
+    <head>
+        <meta charset="utf-8">
+        <title>gbraad's Analogue Clock</title>
+        <meta name="application-name" content="gbraad's Analogue Clock">
+        <link rel="icon" sizes="16x16" href="assets/icon_16.png">
+        <link rel="icon" sizes="48x48" href="assets/icon_48.png">
+        <link rel="icon" sizes="60x60" href="assets/icon_60.png">
+        <link rel="icon" sizes="128x128" href="assets/icon_128.png">
+        <style>
+            body {
+                overflow: hidden;
+                min-height: 100%;
+                margin: 0;
+                background: black;
+            }
+
+            html {
+                height: 100%;
+                background: transparent;
+            }
+
+            #clockface {
+                height: 96vh;
+                width: 96vw;
+            }
+
+            .hand {
+                transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1.2);
+            }
+
+            #secondHand {
+                transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1.2);
+            }
+        </style>
+        <script type="text/javascript">
+            var currentAngles = {
+                hourHand: 0,
+                minuteHand: 0,
+                secondHand: 0
+            };
+
+            var clockInterval = null;
+
+            function initClockDisplay() {
+                document.querySelectorAll('.hand').forEach(el => el.style.transition = "none");
+                updateClock(true);
+                setTimeout(() => {
+                    document.querySelectorAll('.hand').forEach(el => el.style.transition = "");
+                    clockInterval = setInterval(updateClock, 1000);
+                }, 50);
+            }
+
+            function updateClock(reinitialize = false) {
+                const now = new Date();
+                const hours = now.getHours();
+                const minutes = now.getMinutes();
+                const seconds = now.getSeconds();
+
+                const targetHourAngle = (hours % 12) * 30 + minutes * 0.5;
+                const targetMinAngle = minutes * 6;
+                const targetSecAngle = seconds * 6;
+
+                if (reinitialize) {
+                    currentAngles.hourHand = targetHourAngle;
+                    currentAngles.minuteHand = targetMinAngle;
+                    currentAngles.secondHand = targetSecAngle;
+                }
+
+                updateHand('hourHand', targetHourAngle);
+                updateHand('minuteHand', targetMinAngle);
+                updateHand('secondHand', targetSecAngle);
+            }
+
+            function updateHand(id, targetAngle) {
+                const hand = document.getElementById(id);
+                if (!hand) return;
+
+                let currentAngle = currentAngles[id] || 0;
+                let angleDiff = targetAngle - (currentAngle % 360);
+
+                if (angleDiff > 180) angleDiff -= 360;
+                if (angleDiff < -180) angleDiff += 360;
+
+                const newAngle = currentAngle + angleDiff;
+                currentAngles[id] = newAngle;
+
+                hand.setAttribute("transform", `rotate(${newAngle})`);
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                initClockDisplay();
+            });
+
+            window.addEventListener('focus', () => {
+                if (clockInterval !== null) {
+                    clearInterval(clockInterval);
+                }
+                initClockDisplay();
+            });
+        </script>
+    </head>
+    <body>
+        <div id="clockface">
+            <svg xmlns="http://www.w3.org/2000/svg" style="background-color: transparent" width="100%" height="100%"
+                viewBox="0 0 200 200">
+                <!-- Clock face -->
+                <circle cx="100" cy="100" r="98" style="fill: rgb(179, 179, 179); stroke: black; stroke-width: 3.0" />
+                <circle cx="100" cy="100" r="70" style="fill: black; stroke: black; stroke-width: 3.0" />
+
+                <!-- Clock hands -->
+                <g transform="translate(100, 100)">
+                    <g id="hourHand" class="hand">
+                        <line x1="0" y1="0" x2="0" y2="-52" style="stroke: white; stroke-width: 5" />
+                    </g>
+                </g>
+
+                <g transform="translate(100, 100)">
+                    <g id="minuteHand" class="hand">
+                        <line x1="0" y1="0" x2="0" y2="-67" style="stroke: white; stroke-width: 3" />
+                    </g>
+                </g>
+
+                <g transform="translate(100, 100)">
+                    <g id="secondHand" class="hand">
+                        <line x1="0" y1="0" x2="0" y2="-93" style="stroke: rgb(255, 140, 0); stroke-width: 2" />
+                    </g>
+                </g>
+
+                <!-- Center cap -->
+                <circle cx="100" cy="100" r="4" style="fill: black; stroke: white; stroke-width: 2.0" />
+            </svg>
+        </div>
+    </body>
 </html>
